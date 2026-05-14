@@ -1,0 +1,8 @@
+- Nuxt 4 framework with Vue 3
+- Tailwind CSS for styling
+- TypeScript for type safety
+- Auto-imports and file-based routing
+- Server-side rendering (SSR) enabled
+- Component-based architecture with pre-configured WelcomeCard component
+- Professional layout with header, main content area, and footer
+- Ready-to-use responsive grid layouts and utility classes
