@@ -1,6 +1,6 @@
 <template>
-  <section class="relative bg-black text-white overflow-hidden">
-    <div class="hero-bg absolute inset-0 -z-10"></div>
+  <section class="hero-section relative text-white overflow-hidden">
+    <div class="absolute inset-0 -z-10 bg-black/70"></div>
 
     <!-- Navbar -->
     <div class="border-b border-white/10 bg-black/60 backdrop-blur-sm">
@@ -35,27 +35,9 @@
           Get Started
         </button>
       </div>
-
       <p class="text-sm text-white/75 max-w-2xl mx-auto mb-8">
         Helping brands build predictable pipelines with smarter acquisition systems.
       </p>
-
-      <div class="mt-10">
-        <p class="text-sm text-amber-100 mb-4">Trusted by companies like:</p>
-        <div class="relative overflow-hidden border border-white/10 rounded-xl bg-white/5 py-4">
-          <div class="edge-fade-left absolute inset-y-0 left-0 w-16 md:w-24 z-10 pointer-events-none"></div>
-          <div class="edge-fade-right absolute inset-y-0 right-0 w-16 md:w-24 z-10 pointer-events-none"></div>
-
-          <div class="marquee-track">
-            <div class="marquee-row">
-              <span v-for="company in companies" :key="`a-${company}`" class="company-pill">{{ company }}</span>
-            </div>
-            <div class="marquee-row" aria-hidden="true">
-              <span v-for="company in companies" :key="`b-${company}`" class="company-pill">{{ company }}</span>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
 
     <div class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/80 to-transparent pointer-events-none"></div>
@@ -70,7 +52,6 @@ const emit = defineEmits<{
 }>()
 
 const logoPath = '/typoLogo.jpg'
-const companies = ['DREW', 'SOFI', 'TURBOTAX', 'VENMO', 'FITBODY', 'HOSTINGER', 'BUILT', 'DAVE RAMSEY']
 
 // inline color from provided palette (pale-amber 500)
 const primaryColor = '#c8cb34'
@@ -99,49 +80,9 @@ function openModal() {
 </script>
 
 <style scoped>
-.hero-bg {
-  background: radial-gradient(ellipse at bottom, rgba(200,203,52,0.08) 0%, rgba(0,0,0,0.65) 40%), linear-gradient(180deg, #000 0%, #0b0b0b 100%);
+.hero-section {
+  background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)), url('/heroBg.jpg');
   background-size: cover;
-}
-
-.marquee-track {
-  width: max-content;
-  display: flex;
-  align-items: center;
-  animation: marquee 24s linear infinite;
-}
-
-.marquee-row {
-  display: flex;
-  align-items: center;
-  gap: 1.25rem;
-  padding-inline: 0.625rem;
-}
-
-.company-pill {
-  color: rgba(255, 255, 255, 0.82);
-  letter-spacing: 0.08em;
-  font-size: 0.78rem;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  padding: 0.45rem 0.8rem;
-  border-radius: 9999px;
-  background: rgba(255, 255, 255, 0.04);
-}
-
-.edge-fade-left {
-  background: linear-gradient(90deg, rgba(0, 0, 0, 0.92), rgba(0, 0, 0, 0));
-}
-
-.edge-fade-right {
-  background: linear-gradient(270deg, rgba(0, 0, 0, 0.92), rgba(0, 0, 0, 0));
-}
-
-@keyframes marquee {
-  0% {
-    transform: translateX(0%);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
+  background-position: center;
 }
 </style>

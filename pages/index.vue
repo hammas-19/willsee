@@ -13,11 +13,25 @@
 
     <section class="max-w-7xl mx-auto px-6 pb-16 md:pb-20">
       <h2 class="text-3xl md:text-5xl font-serif text-center mb-10">What We Do</h2>
-      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        <article v-for="service in services" :key="service.title" class="rounded-2xl border border-white/10 bg-white/5 p-6">
-          <h3 class="text-xl font-semibold mb-2 text-[#d3d55d]">{{ service.title }}</h3>
-          <p class="text-white/80 leading-relaxed">{{ service.description }}</p>
-        </article>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div
+          v-for="service in services"
+          :key="service.title"
+          class="service-card group relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-white/5 to-white/0 p-8 transition-all duration-300"
+          @mousemove="handleMouseMove"
+          @mouseleave="handleMouseLeave"
+        >
+          <!-- Pointer follower -->
+          <div class="pointer-follower absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100" :style="follerStyle"></div>
+
+          <div class="relative z-10">
+            <div class="mb-4 flex items-center justify-start">
+              <div v-html="service.icon" :class="[service.iconSize || 'w-12 h-12', 'text-[#d3d55d]']"></div>
+            </div>
+            <h3 class="text-2xl font-semibold mb-3 text-[#d3d55d] transition-colors duration-300 group-hover:text-[#e8ec5d]">{{ service.title }}</h3>
+            <p class="text-white/80 leading-relaxed text-base transition-colors duration-300 group-hover:text-white/90">{{ service.description }}</p>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -39,8 +53,8 @@
         <div class="fade-left absolute inset-y-0 left-0 w-16 md:w-32 z-10 pointer-events-none"></div>
         <div class="fade-right absolute inset-y-0 right-0 w-16 md:w-32 z-10 pointer-events-none"></div>
         
-        <div class="marquee-track marquee-ltr" :style="{ animationPlayState: isTestimonialsPaused ? 'paused' : 'running' }" @mouseenter="isTestimonialsPaused = true" @mouseleave="isTestimonialsPaused = false">
-          <div class="marquee-row" v-for="batch in 3" :key="`ltr-batch-${batch}`">
+        <div class="marquee-track marquee-ltr">
+          <div class="marquee-row" v-for="batch in 4" :key="`ltr-batch-${batch}`">
             <div v-for="(testimonial, i) in testimonials.slice(0, 2)" :key="`row1-${batch}-${i}`" class="testimonial-card">
               <p class="mb-4 text-white/85 leading-relaxed text-sm">{{ testimonial.quote }}</p>
               <div class="flex items-center gap-3">
@@ -60,8 +74,8 @@
         <div class="fade-left absolute inset-y-0 left-0 w-16 md:w-32 z-10 pointer-events-none"></div>
         <div class="fade-right absolute inset-y-0 right-0 w-16 md:w-32 z-10 pointer-events-none"></div>
         
-        <div class="marquee-track marquee-rtl" :style="{ animationPlayState: isTestimonialsPaused ? 'paused' : 'running' }" @mouseenter="isTestimonialsPaused = true" @mouseleave="isTestimonialsPaused = false">
-          <div class="marquee-row" v-for="batch in 3" :key="`rtl-batch-${batch}`">
+        <div class="marquee-track marquee-rtl">
+          <div class="marquee-row" v-for="batch in 4" :key="`rtl-batch-${batch}`">
             <div v-for="(testimonial, i) in testimonials.slice(2)" :key="`row2-${batch}-${i}`" class="testimonial-card">
               <p class="mb-4 text-white/85 leading-relaxed text-sm">{{ testimonial.quote }}</p>
               <div class="flex items-center gap-3">
@@ -135,32 +149,41 @@ type LeadPayload = {
 }
 
 const isModalOpen = ref(false)
-const isTestimonialsPaused = ref(false)
+const follerStyle = ref({})
 
 const services = [
   {
     title: 'Targeted Lead Generation',
-    description: 'We identify and connect you with decision-makers actively interested in your offer through precise targeting and outreach systems.'
+    description: 'We identify and connect you with decision-makers actively interested in your offer through precise targeting and outreach systems.',
+    icon: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 16 16"><path fill="currentColor" d="M8 0q.552.001 1.09.074c.337.047.499.424.324.716L9.4.814a.52.52 0 0 1-.517.243A6.995 6.995 0 0 0 1.003 8c0 3.87 3.13 7 7 7a6.995 6.995 0 0 0 6.944-7.88a.52.52 0 0 1 .243-.517l.022-.014c.292-.175.67-.013.716.324q.075.532.075 1.09c0 4.42-3.58 8-8 8s-8-3.58-8-8s3.58-8 8-8z"/><path fill="currentColor" d="M8 4c.177 0 .253.211.128.336l-.592.592a.7.7 0 0 1-.312.173a3 3 0 0 0-2.22 2.9c0 1.66 1.34 3 3 3c1.39 0 2.56-.944 2.9-2.22a.7.7 0 0 1 .173-.312l.592-.592c.126-.126.337-.05.337.128c0 2.21-1.79 4-4 4s-4-1.79-4-4s1.79-4 4-4z"/><path fill="currentColor" d="M12.6.008a.5.5 0 0 1 .405.395l.435 2.17l2.17.435a.5.5 0 0 1 .159.919l-2.5 1.5a.5.5 0 0 1-.257.071h-1.79l-2.35 2.35a.5.5 0 0 1-.707-.707l2.35-2.35v-1.79l.005-.067a.5.5 0 0 1 .066-.19l1.5-2.5l.044-.062A.5.5 0 0 1 12.6.01z"/></svg>'
   },
   {
     title: 'Cold Email Outreach',
-    description: 'Personalized outbound campaigns designed to start meaningful conversations and generate qualified appointments at scale.'
+    description: 'Personalized outbound campaigns designed to start meaningful conversations and generate qualified appointments at scale.',
+    icon: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M4.308 6L12 11l7.692-5zm.308 13q-.667 0-1.141-.475T3 17.386V6.615q0-.666.475-1.14T4.615 5h14.77q.666 0 1.14.475T21 6.615v5.577q0 .213-.144.357t-.357.143t-.356-.143t-.143-.357V6.885l-7.552 4.944q-.094.069-.448.13q-.125 0-.234-.027q-.108-.028-.214-.103L4 6.884v10.5q0 .27.173.443t.443.173H9.75q.213 0 .356.144t.144.357t-.144.356T9.75 19zm10.873.854l5.334-5.335q.14-.14.344-.15t.364.15t.16.354t-.16.354l-5.477 5.477q-.242.242-.565.242t-.566-.242l-2.638-2.639q-.14-.14-.15-.344t.15-.363t.354-.16t.353.16z"/></svg>',
+    iconSize: 'w-16 h-16'
   },
   {
     title: 'Sales Funnel Optimization',
-    description: 'Landing pages, messaging, and conversion flows optimized to increase response rates and maximize ROI.'
+    description: 'Landing pages, messaging, and conversion flows optimized to increase response rates and maximize ROI.',
+    icon: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><path fill="currentColor" d="m14.001 22.997l4 3.999l-4 4l-1.414-1.415l1.586-1.586H10a.99.99 0 0 1-.854-.511l-4.014-6.992l1.737-.993l3.712 6.496h3.591l-1.585-1.585zM28 13c-.16 0-.315.023-.469.047l-4.653-8.53A1 1 0 0 0 22 3.995h-4.169l1.585-1.585L18 .996l-3.998 4L18 8.994l1.415-1.414l-1.585-1.585h3.576l4.369 8.009A2.98 2.98 0 0 0 25 16c0 .768.297 1.462.773 1.992L22 24.907L10.878 4.517a1 1 0 0 0-1.755 0l-3.85 7.057l1.732 1L10 7.084l11.123 20.39a1 1 0 0 0 1.755 0l4.649-8.522c.155.025.31.048.473.048a3 3 0 1 0 0-6M7 15.996c0-1.655-1.345-3-3-3s-3 1.345-3 3s1.346 3 3 3s3-1.346 3-3m-2 0a1 1 0 1 1-2-.002a1 1 0 0 1 2 .002"/></svg>'
   },
   {
     title: 'Appointment Setting',
-    description: 'We help fill your calendar with qualified prospects so your sales team can focus on closing deals.'
+    description: 'We help fill your calendar with qualified prospects so your sales team can focus on closing deals.',
+    icon: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 48 48"><path fill="currentColor" d="M10.75 4c.69 0 1.25.56 1.25 1.25v5.5c0 .69-.56 1.25-1.25 1.25h-5.5a1.25 1.25 0 1 1 0-2.5H9.5V5.25c0-.69.56-1.25 1.25-1.25m26.5 0c.69 0 1.25.56 1.25 1.25V9.5h4.25a1.25 1.25 0 1 1 0 2.5h-5.5c-.69 0-1.25-.56-1.25-1.25v-5.5c0-.69.56-1.25 1.25-1.25M16.5 12a2.5 2.5 0 0 0-2.5 2.5v19a2.5 2.5 0 0 0 2.5 2.5h15a2.5 2.5 0 0 0 2.5-2.5v-19a2.5 2.5 0 0 0-2.5-2.5zm0 2.5h15v19h-15zm3.75 4.5a1.25 1.25 0 1 0 0 2.5h7.5a1.25 1.25 0 1 0 0-2.5zm0 5a1.25 1.25 0 1 0 0 2.5h4.5a1.25 1.25 0 1 0 0-2.5zM12 42.75a1.25 1.25 0 1 1-2.5 0V38.5H5.25a1.25 1.25 0 1 1 0-2.5h5.5c.69 0 1.25.56 1.25 1.25zm26.5 0a1.25 1.25 0 1 1-2.5 0v-5.5c0-.69.56-1.25 1.25-1.25h5.5a1.25 1.25 0 1 1 0 2.5H38.5z"/></svg>',
+    iconSize: 'w-16 h-16'
   },
   {
     title: 'B2B Prospecting',
-    description: 'Advanced prospect research and segmentation tailored to your industry, market, and ideal customer profile.'
+    description: 'Advanced prospect research and segmentation tailored to your industry, market, and ideal customer profile.',
+    icon: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"><path d="M16 2v4M8 2v4m13 7v-1c0-3.771 0-5.657-1.172-6.828S16.771 4 13 4h-2C7.229 4 5.343 4 4.172 5.172S3 8.229 3 12v2c0 3.771 0 5.657 1.172 6.828S7.229 22 11 22M3 10h18"/><path d="M13 19.5s1.348.507 2 2.5c0 0 3.177-5 6-6"/></g></svg>'
   },
   {
     title: 'Growth Automation',
-    description: 'Smart automation systems that streamline outreach, follow-ups, and lead management for faster scaling.'
+    description: 'Smart automation systems that streamline outreach, follow-ups, and lead management for faster scaling.',
+    icon: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M4 19V7l8-6l8 6v4h-2V8l-6-4.5L6 8v9h6v2Zm14.5 3l-1.4-3.1l-3.1-1.4l3.1-1.4l1.4-3.1l1.4 3.1l3.1 1.4l-3.1 1.4Z"/></svg>',
+    iconSize: 'w-16 h-16'
   }
 ]
 
@@ -213,12 +236,48 @@ const testimonials = [
 ]
 
 function handleLeadSubmit(payload: LeadPayload) {
-  // Placeholder for backend integration (API, CRM, email webhook)
-  console.log('Lead submitted:', payload)
+  // TODO: Integrate with backend API/CRM
+}
+
+function handleMouseMove(e: any) {
+  const card = e.currentTarget as any
+  const rect = card.getBoundingClientRect()
+  const x = e.clientX - rect.left
+  const y = e.clientY - rect.top
+
+  follerStyle.value = {
+    background: `radial-gradient(circle at 50% 50%, rgba(200, 203, 52, 0.5), transparent 70%)`,
+    transform: `translate(${x - 120}px, ${y - 120}px)`,
+    width: '240px',
+    height: '240px',
+    borderRadius: '50%',
+    pointerEvents: 'none',
+    filter: 'blur(45px)',
+    transition: 'transform 0.8s ease-out'
+  } as any
+}
+
+function handleMouseLeave() {
+  follerStyle.value = {}
 }
 </script>
 
 <style scoped>
+.service-card {
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.service-card:hover {
+  transform: translateY(-4px) scale(1.02);
+}
+
+.pointer-follower {
+  transition: opacity 0.3s ease-out;
+}
+
 .testimonial-card {
   flex-shrink: 0;
   width: 360px;
@@ -235,12 +294,22 @@ function handleLeadSubmit(payload: LeadPayload) {
   padding: 1px 0;
 }
 
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+.marquee-track {
+  animation-play-state: running;
+}
+
 .marquee-track.marquee-ltr {
-  animation: marquee-ltr 50s linear infinite;
+  animation: marquee-ltr 20s linear infinite;
+  animation-fill-mode: none;
 }
 
 .marquee-track.marquee-rtl {
-  animation: marquee-rtl 50s linear infinite;
+  animation: marquee-rtl 20s linear infinite;
+  animation-fill-mode: none;
 }
 
 .marquee-row {
@@ -258,20 +327,12 @@ function handleLeadSubmit(payload: LeadPayload) {
 }
 
 @keyframes marquee-ltr {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(calc(-33.333%));
-  }
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-25%)); }
 }
 
 @keyframes marquee-rtl {
-  0% {
-    transform: translateX(calc(-33.333%));
-  }
-  100% {
-    transform: translateX(0);
-  }
+  0% { transform: translateX(calc(-25%)); }
+  100% { transform: translateX(0); }
 }
 </style>
