@@ -45,54 +45,34 @@
       </div>
     </section>
 
-    <section class="py-16 md:py-20">
-      <h2 class="text-3xl md:text-5xl font-serif text-center mb-12">What Clients Say</h2>
-      
-      <!-- First Marquee Row (Left to Right) -->
-      <div class="mb-6 relative overflow-hidden group">
-        <div class="fade-left absolute inset-y-0 left-0 w-16 md:w-32 z-10 pointer-events-none"></div>
-        <div class="fade-right absolute inset-y-0 right-0 w-16 md:w-32 z-10 pointer-events-none"></div>
+    <div class="testimonials-section-wrapper">
+      <section class="py-16 md:py-20">
+        <h2 class="text-3xl md:text-5xl font-serif text-center mb-12">What Clients Say</h2>
         
-        <div class="marquee-track marquee-ltr">
-          <div class="marquee-row" v-for="batch in 4" :key="`ltr-batch-${batch}`">
-            <div v-for="(testimonial, i) in testimonials.slice(0, 2)" :key="`row1-${batch}-${i}`" class="testimonial-card">
-              <p class="mb-4 text-white/85 leading-relaxed text-sm">{{ testimonial.quote }}</p>
-              <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-[#c8cb34] to-[#a0a22a] flex items-center justify-center text-black font-bold text-xs flex-shrink-0">{{ testimonial.initials }}</div>
-                <div class="min-w-0">
-                  <p class="font-semibold text-sm">{{ testimonial.name }}</p>
-                  <p class="text-xs text-white/60 truncate">{{ testimonial.company }}</p>
+        <!-- Single Infinite Marquee Row -->
+        <div class="relative overflow-hidden group">
+          <div class="fade-left absolute inset-y-0 left-0 w-16 md:w-32 z-10 pointer-events-none"></div>
+          <div class="fade-right absolute inset-y-0 right-0 w-16 md:w-32 z-10 pointer-events-none"></div>
+          
+          <div class="marquee-track marquee-ltr">
+            <div class="marquee-row" v-for="batch in 6" :key="`infinite-batch-${batch}`">
+              <div v-for="(testimonial, i) in testimonials" :key="`infinite-${batch}-${i}`" class="testimonial-card">
+                <p class="mb-4 text-white/85 leading-relaxed text-sm">{{ testimonial.quote }}</p>
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-full bg-gradient-to-br from-[#c8cb34] to-[#a0a22a] flex items-center justify-center text-black font-bold text-xs flex-shrink-0">{{ testimonial.initials }}</div>
+                  <div class="min-w-0">
+                    <p class="font-semibold text-sm">{{ testimonial.name }}</p>
+                    <p class="text-xs text-white/60 truncate">{{ testimonial.company }}</p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      <!-- Second Marquee Row (Right to Left) -->
-      <div class="relative overflow-hidden group">
-        <div class="fade-left absolute inset-y-0 left-0 w-16 md:w-32 z-10 pointer-events-none"></div>
-        <div class="fade-right absolute inset-y-0 right-0 w-16 md:w-32 z-10 pointer-events-none"></div>
-        
-        <div class="marquee-track marquee-rtl">
-          <div class="marquee-row" v-for="batch in 4" :key="`rtl-batch-${batch}`">
-            <div v-for="(testimonial, i) in testimonials.slice(2)" :key="`row2-${batch}-${i}`" class="testimonial-card">
-              <p class="mb-4 text-white/85 leading-relaxed text-sm">{{ testimonial.quote }}</p>
-              <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-[#c8cb34] to-[#a0a22a] flex items-center justify-center text-black font-bold text-xs flex-shrink-0">{{ testimonial.initials }}</div>
-                <div class="min-w-0">
-                  <p class="font-semibold text-sm">{{ testimonial.name }}</p>
-                  <p class="text-xs text-white/60 truncate">{{ testimonial.company }}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="max-w-5xl mx-auto px-6 pb-20 text-center">
-      <div class="rounded-3xl border border-[#c8cb34]/30 bg-[#c8cb34]/10 p-8 md:p-10">
+      <section class="max-w-5xl mx-auto px-6 pb-20 text-center">
+        <div class="rounded-3xl border border-[#c8cb34]/30 bg-[#c8cb34]/10 p-8 md:p-10">
         <h2 class="text-3xl md:text-5xl font-serif mb-4">Ready to Scale Your Pipeline?</h2>
         <p class="text-white/85 max-w-3xl mx-auto mb-8">
           Stop chasing cold prospects and start building a predictable lead generation system that drives measurable growth.
@@ -114,17 +94,60 @@
           </button>
         </div>
       </div>
-    </section>
+      </section>
+    </div>
 
-    <footer class="border-t border-white/10 py-8 text-center text-sm text-white/60">
-      <p>Convertix</p>
-      <p>Turning Prospects Into Results.</p>
-      <p class="mt-3 text-white/80">Contact</p>
-      <p class="mt-1">hello@convertix.com</p>
-      <p>www.convertix.com</p>
-      <p class="mt-3 text-white/80">Follow</p>
-      <p class="mt-1">LinkedIn · Instagram · Twitter/X</p>
-      <p class="mt-4">© 2026 Convertix. All rights reserved.</p>
+    <footer class="border-t border-white/10 bg-black py-12 text-white">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+          <!-- Brand -->
+          <div>
+            <img src="/typoLogo.jpg" alt="Convertix" class="h-16 md:h-20 w-auto mb-2 object-contain" />
+            <p class="text-white/60">Turning Prospects Into Results.</p>
+          </div>
+
+          <!-- Contact -->
+          <div>
+            <h4 class="font-semibold mb-3 text-white/80">Contact</h4>
+            <p class="text-[#c8cb34] mb-2 hover:text-[#e8ec5d] transition-colors">
+              <a href="mailto:hello@convertix.com" class="text-inherit">hello@convertix.com</a>
+            </p>
+            <p class="text-[#c8cb34] hover:text-[#e8ec5d] transition-colors">
+              <a href="https://www.convertix.com" target="_blank" class="text-inherit">www.convertix.com</a>
+            </p>
+          </div>
+
+          <!-- Social -->
+          <div>
+            <h4 class="font-semibold mb-3 text-white/80">Follow Us</h4>
+            <div class="flex gap-4">
+              <a href="https://linkedin.com" target="_blank" class="w-8 h-8 rounded-full border border-[#c8cb34]/50 text-[#c8cb34] flex items-center justify-center hover:border-[#e8ec5d] hover:text-[#e8ec5d] transition-colors" title="LinkedIn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"></path>
+                  <circle cx="4" cy="4" r="2"></circle>
+                </svg>
+              </a>
+              <a href="https://instagram.com" target="_blank" class="w-8 h-8 rounded-full border border-[#c8cb34]/50 text-[#c8cb34] flex items-center justify-center hover:border-[#e8ec5d] hover:text-[#e8ec5d] transition-colors" title="Instagram">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                  <circle cx="17.5" cy="6.5" r="1.5"></circle>
+                </svg>
+              </a>
+              <a href="https://twitter.com" target="_blank" class="w-8 h-8 rounded-full border border-[#c8cb34]/50 text-[#c8cb34] flex items-center justify-center hover:border-[#e8ec5d] hover:text-[#e8ec5d] transition-colors" title="Twitter/X">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.6l-5.17-6.763-5.91 6.763h-3.308l7.73-8.835L2.55 2.25h6.556l4.702 6.217 5.436-6.217zM17.15 18.344h1.828L6.122 4.125H4.231l12.919 14.219z"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Divider -->
+        <div class="border-t border-white/10 pt-8">
+          <p class="text-center text-white/50 text-sm">© 2026 Convertix. All rights reserved.</p>
+        </div>
+      </div>
     </footer>
 
     <LeadCaptureModal
@@ -276,6 +299,14 @@ function handleMouseLeave() {
 
 .pointer-follower {
   transition: opacity 0.3s ease-out;
+}
+
+.testimonials-section-wrapper {
+  background: linear-gradient(rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.882)), url('/secBg.jpg');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  width: 100%;
 }
 
 .testimonial-card {
