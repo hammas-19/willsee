@@ -36,7 +36,7 @@
         </button>
       </div>
       <p class="text-sm text-white/75 max-w-2xl mx-auto mb-8">
-        Helping brands build predictable pipelines with smarter acquisition systems.
+        Helping agencies build predictable pipelines with smarter acquisition systems.
       </p>
     </div>
 

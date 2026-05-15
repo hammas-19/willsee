@@ -153,7 +153,6 @@
     <LeadCaptureModal
       :open="isModalOpen"
       @close="isModalOpen = false"
-      @submit="handleLeadSubmit"
     />
   </div>
 </template>
@@ -167,7 +166,7 @@ type LeadPayload = {
   fullName: string
   email: string
   company: string
-  leadGoal: string
+  contactNumber: string
   message: string
 }
 
@@ -216,8 +215,8 @@ const whyConvertix = [
     description: 'We focus on high-intent prospects that align with your business goals.'
   },
   {
-    title: 'Scalable Systems',
-    description: 'Our growth frameworks are designed to scale consistently as your business grows.'
+    title: 'Quality Monitoring System',
+    description: 'Our quality monitoring systems ensure consistent performance, accuracy, and continuous improvement across every process.'
   },
   {
     title: 'Data-Driven Decisions',

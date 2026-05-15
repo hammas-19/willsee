@@ -25,7 +25,7 @@
           </button>
         </div>
 
-        <form class="space-y-4" @submit.prevent="handleSubmit">
+        <form class="space-y-4" @submit.prevent="submitForm">
           <div class="grid gap-4 md:grid-cols-2">
             <label class="block text-sm">
               <span class="mb-1 block text-white/80">Full Name</span>
@@ -62,12 +62,12 @@
             </label>
 
             <label class="block text-sm">
-              <span class="mb-1 block text-white/80">Monthly Lead Goal</span>
+              <span class="mb-1 block text-white/80">Contact Number</span>
               <input
-                v-model="form.leadGoal"
+                v-model="form.contactNumber"
                 class="w-full rounded-md border border-white/20 bg-black/40 px-3 py-2 text-white outline-none focus:border-[#c8cb34]"
-                type="text"
-                placeholder="50+ qualified leads"
+                type="tel"
+                placeholder="+1 (555) 123-4567"
               />
             </label>
           </div>
@@ -87,8 +87,16 @@
             :style="submitStyle"
             type="submit"
           >
-            Submit Request
+            {{ result || 'Submit Request' }}
           </button>
+
+          <p
+            v-if="status"
+            class="text-sm"
+            :class="status === 'success' ? 'text-[#c8cb34]' : 'text-red-400'"
+          >
+            {{ status === 'success' ? 'Thanks, we will be in touch shortly.' : result }}
+          </p>
         </form>
       </div>
     </div>
@@ -96,13 +104,15 @@
 </template>
 
 <script setup lang="ts">
-import { computed, reactive, watch } from 'vue'
+import { computed, reactive, ref, watch } from 'vue'
 
 type LeadForm = {
+  access_key: string
+  subject: string
   fullName: string
   email: string
   company: string
-  leadGoal: string
+  contactNumber: string
   message: string
 }
 
@@ -110,16 +120,20 @@ const props = defineProps<{ open: boolean }>()
 
 const emit = defineEmits<{
   (e: 'close'): void
-  (e: 'submit', payload: LeadForm): void
 }>()
 
 const form = reactive<LeadForm>({
+  access_key: 'YOUR_ACCESS_KEY_HERE',
+  subject: 'New Submission from Web3Forms',
   fullName: '',
   email: '',
   company: '',
-  leadGoal: '',
+  contactNumber: '',
   message: ''
 })
+
+const result = ref('')
+const status = ref('')
 
 const submitStyle = computed(() => ({
   background: 'linear-gradient(180deg, #c8cb34, #a0a22a)'
@@ -140,8 +154,39 @@ function closeModal() {
   emit('close')
 }
 
-function handleSubmit() {
-  emit('submit', { ...form })
-  closeModal()
+const submitForm = async () => {
+  result.value = 'Please wait...'
+
+  try {
+    const response = await $fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: form
+    })
+
+    result.value = response.message
+
+    if (response.status === 200) {
+      status.value = 'success'
+      closeModal()
+    } else {
+      status.value = 'error'
+    }
+  } catch (error) {
+    console.log(error)
+    status.value = 'error'
+    result.value = 'Something went wrong!'
+  } finally {
+    form.fullName = ''
+    form.email = ''
+    form.company = ''
+    form.contactNumber = ''
+    form.message = ''
+
+    setTimeout(() => {
+      result.value = ''
+      status.value = ''
+    }, 5000)
+  }
 }
 </script>
