@@ -5,7 +5,7 @@
     <!-- Navbar -->
     <div class="border-b border-white/10 bg-black/60 backdrop-blur-sm">
       <div class="max-w-7xl mx-auto px-6 py-3 flex justify-center">
-        <img :src="logoPath" alt="Convertix" class="h-6 md:h-7 object-contain" />
+        <img :src="logoPath" alt="Convertixz" class="h-6 md:h-7 object-contain" />
       </div>
     </div>
 
@@ -15,7 +15,7 @@
       </h1>
 
       <p class="text-amber-200 text-lg md:text-xl mb-8 max-w-2xl mx-auto">
-        Convertix helps businesses generate qualified leads through strategic outreach, high-converting funnels, and performance-driven growth systems designed to scale revenue consistently.
+        Convertixz helps businesses generate qualified leads through strategic outreach, high-converting funnels, and performance-driven growth systems designed to scale revenue consistently.
       </p>
 
       <div class="flex justify-center gap-4 mb-12">
@@ -51,7 +51,7 @@ const emit = defineEmits<{
   (e: 'open-form'): void
 }>()
 
-const logoPath = '/typoLogo.jpg'
+const logoPath = '/typoLogo.jpeg'
 
 // inline color from provided palette (pale-amber 500)
 const primaryColor = '#c8cb34'

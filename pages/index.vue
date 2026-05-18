@@ -5,7 +5,7 @@
     <section class="max-w-7xl mx-auto px-6 py-16 md:py-20">
       <h2 class="text-3xl md:text-5xl font-serif text-center mb-5">Growth Built Around Results</h2>
       <p class="text-center text-white/80 max-w-3xl mx-auto leading-relaxed">
-        Convertix is a modern lead generation partner focused on helping companies attract, engage, and convert the right customers.
+        Convertixz is a modern lead generation partner focused on helping companies attract, engage, and convert the right customers.
         We combine data-driven outreach, conversion-focused systems, and scalable growth strategies to help businesses create consistent opportunities without wasting time on low-quality leads.
         From startups to growing brands, we build acquisition systems that turn attention into revenue.
       </p>
@@ -36,7 +36,7 @@
     </section>
 
     <section class="max-w-7xl mx-auto px-6 pb-16 md:pb-20">
-      <h2 class="text-3xl md:text-5xl font-serif text-center mb-10">Why Brands Choose Convertix</h2>
+      <h2 class="text-3xl md:text-5xl font-serif text-center mb-10">Why Companies Choose Convertixz</h2>
       <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         <div v-for="point in whyConvertix" :key="point.title" class="rounded-xl border border-white/10 bg-black/40 p-5">
           <h3 class="font-semibold mb-2">{{ point.title }}</h3>
@@ -61,8 +61,7 @@
                 <div class="flex items-center gap-3">
                   <div class="w-10 h-10 rounded-full bg-gradient-to-br from-[#c8cb34] to-[#a0a22a] flex items-center justify-center text-black font-bold text-xs flex-shrink-0">{{ testimonial.initials }}</div>
                   <div class="min-w-0">
-                    <p class="font-semibold text-sm">{{ testimonial.name }}</p>
-                    <p class="text-xs text-white/60 truncate">{{ testimonial.company }}</p>
+                    <p class="font-semibold text-sm truncate">{{ testimonial.company }}</p>
                   </div>
                 </div>
               </div>
@@ -102,7 +101,7 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           <!-- Brand -->
           <div>
-            <img src="/typoLogo.jpg" alt="Convertix" class="h-16 md:h-20 w-auto mb-2 object-contain" />
+            <img src="/typoLogo.jpeg" alt="Convertixz" class="h-16 md:h-20 w-auto mb-2 object-contain" />
             <p class="text-white/60">Turning Prospects Into Results.</p>
           </div>
 
@@ -110,10 +109,10 @@
           <div>
             <h4 class="font-semibold mb-3 text-white/80">Contact</h4>
             <p class="text-[#c8cb34] mb-2 hover:text-[#e8ec5d] transition-colors">
-              <a href="mailto:hello@convertix.com" class="text-inherit">hello@convertix.com</a>
+              <a href="mailto:hello@convertixz.com" class="text-inherit">hello@convertixz.com</a>
             </p>
             <p class="text-[#c8cb34] hover:text-[#e8ec5d] transition-colors">
-              <a href="https://www.convertix.com" target="_blank" class="text-inherit">www.convertix.com</a>
+              <a href="https://www.convertixz.com" target="_blank" class="text-inherit">www.convertixz.com</a>
             </p>
           </div>
 
@@ -145,7 +144,7 @@
 
         <!-- Divider -->
         <div class="border-t border-white/10 pt-8">
-          <p class="text-center text-white/50 text-sm">© 2026 Convertix. All rights reserved.</p>
+          <p class="text-center text-white/50 text-sm">© 2026 Convertixz. All rights reserved.</p>
         </div>
       </div>
     </footer>
@@ -238,22 +237,24 @@ const whyConvertix = [
 
 const testimonials = [
   {
-    quote: 'Convertix completely transformed our outreach process and helped us generate consistent inbound opportunities.',
-    name: 'Morgan Baume',
-    company: 'Alchemy Plumbing',
-    initials: 'MB'
+    quote: 'Convertixz completely transformed our outreach process and helped us generate consistent inbound opportunities.',
+    company: 'Staffing Agency',
+    initials: 'SA'
   },
   {
     quote: 'The quality of leads and professionalism of the campaigns exceeded our expectations.',
-    name: 'Jeff Seale',
-    company: 'Accurate Electric Plumbing, Heating & Air',
-    initials: 'JS'
+    company: 'Anago Cleaning System',
+    initials: 'ACS'
   },
   {
     quote: 'Their systems gave our sales team a predictable pipeline we could finally scale.',
-    name: 'Corson Searles',
-    company: 'Identity Shift Hockey',
-    initials: 'CS'
+    company: 'Stratus Building Solution',
+    initials: 'SBS'
+  },
+  {
+    quote: 'Our lead flow became much more consistent, and the team could focus on converting quality opportunities.',
+    company: 'IT Service Provider',
+    initials: 'IT'
   }
 ]
 
